@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "codex-analytics"
+version = "0.1.0"
+description = ""
+authors = ["nikolasschriefer <info@nikolasschriefer.de>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+openai = "^0.10.3"
+matplotlib = "^3.4.3"
+jupyter = "^1.0.0"
+streamlit = "^0.88.0"
+watchdog = "^2.1.5"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
