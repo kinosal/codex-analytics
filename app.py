@@ -8,8 +8,8 @@ import textwrap
 import streamlit as st
 import openai
 
-# Assign OpenAI API key from environment variable
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Assign OpenAI API key from environment variable or streamlit secrets dict
+openai.api_key = os.getenv("OPENAI_API_KEY") or st.secrets["OPENAI_API_KEY"]
 
 
 def openai_call(prompt: str, stop: str = None) -> str:
