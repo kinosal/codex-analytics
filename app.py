@@ -40,6 +40,8 @@ def openai_call(prompt: str, stop: str = None) -> str:
 
 # Page start
 
+st.set_page_config(page_title="English to Code", page_icon="🤖")
+
 st.title(
     "English to Code w/ [OpenAI Codex](https://openai.com/blog/openai-codex/)"
 )
@@ -94,11 +96,11 @@ elif selectbox == "English to Pandas":
     table_name_label = "DataFrame name"
 
 table_name = st.text_input(label=table_name_label, value="traffic")
-column_names = st.text_input(
+column_names = st.text_area(
     label="Column names (comma-separated; optionally specify data types in parentheses)",
     value="url (string), event (string), country (string)",
 )
-statement = st.text_input(
+statement = st.text_area(
     label="English text prompt/query statement",
     value="Count the number of pageview events by url for urls with at least 10 pageviews"
 )
@@ -108,16 +110,16 @@ if statement:
         prompt = textwrap.dedent(
             f'''
             """
-            The table "{table_name}" contains the following colums: {column_names}
+            The database table "{table_name}" contains the following colums: {column_names}
             """
 
             # {statement}
             sql = """
-
             '''
         )
         stop = '"""'
         result_prefix = ""
+        language = "sql"
 
     elif selectbox == "English to Pandas":
         prompt = textwrap.dedent(
@@ -131,9 +133,12 @@ if statement:
         )
         stop = "\n"
         result_prefix = table_name + "."
+        language = "python"
 
+    st.markdown("""---""")
+    st.header("Result")
+    st.code(result_prefix + openai_call(prompt, stop), language=language)
+
+    st.markdown("""---""")
     st.header("Prompt sent to Codex")
     st.text(prompt)
-
-    st.header("Returned/resulting statement")
-    st.text(result_prefix + openai_call(prompt, stop))
