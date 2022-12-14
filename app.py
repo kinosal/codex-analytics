@@ -20,7 +20,7 @@ def openai_call(prompt: str, stop: str = None) -> str:
     Return: predicted response text
     """
     kwargs = {
-        "engine": "davinci-codex",
+        "engine": "code-davinci-002",
         "prompt": prompt,
         "max_tokens": 64,
         "temperature": 0,
@@ -32,7 +32,7 @@ def openai_call(prompt: str, stop: str = None) -> str:
     if stop:
         kwargs["stop"] = stop
     response = openai.Completion.create(**kwargs)
-    print(response)
+    # print(response)
     return response["choices"][0]["text"]
 
 
