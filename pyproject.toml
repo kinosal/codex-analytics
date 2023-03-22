@@ -6,7 +6,7 @@ authors = ["nikolasschriefer <info@nikolasschriefer.de>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-openai = "^0.25"
+openai = "^0.27"
 streamlit = "^1.15"
 matplotlib = "^3.4"
 
